@@ -1,0 +1,5 @@
+/vendor/
+.env
+Thumbs.db
+*.log
+*.docx
