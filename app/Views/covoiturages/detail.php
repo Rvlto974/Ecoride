@@ -26,6 +26,14 @@
 <h2>Chauffeur</h2>
 <ul>
     <li>Pseudo : <?= htmlspecialchars($covoiturage['chauffeur']) ?></li>
+    <li>
+        Note moyenne :
+        <?php if ($moyenne !== null): ?>
+            <?= htmlspecialchars((string) $moyenne) ?>/5
+        <?php else: ?>
+            Pas encore d'avis
+        <?php endif; ?>
+    </li>
 </ul>
 
 <h2>Vehicule</h2>
@@ -36,10 +44,25 @@
     <li>Nombre de places du vehicule : <?= htmlspecialchars((string) $covoiturage['vehicule_nb_places']) ?></li>
 </ul>
 
+<!-- Avis valides du chauffeur (depuis MongoDB) -->
+<h2>Avis sur le chauffeur</h2>
+<?php if (empty($avis)): ?>
+    <p>Aucun avis pour le moment.</p>
+<?php else: ?>
+    <ul>
+        <?php foreach ($avis as $unAvis): ?>
+            <li>
+                <strong><?= htmlspecialchars((string) $unAvis['note']) ?>/5</strong>
+                par <?= htmlspecialchars($unAvis['pseudo_passager']) ?><br>
+                <?= htmlspecialchars($unAvis['commentaire']) ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
 <!-- Participation -->
 <?php if (isset($_SESSION['user'])): ?>
     <?php if ($covoiturage['nb_places'] > 0): ?>
-        <!-- Formulaire de participation (POST) : un bouton qui envoie la demande -->
         <form action="/covoiturage/<?= htmlspecialchars((string) $covoiturage['id_covoiturage']) ?>/participer" method="post">
             <button type="submit">Participer (<?= htmlspecialchars((string) $covoiturage['prix']) ?> credits)</button>
         </form>
@@ -47,6 +70,5 @@
         <p>Ce trajet est complet.</p>
     <?php endif; ?>
 <?php else: ?>
-    <!-- Visiteur non connecte -->
     <p><a href="/connexion">Connectez-vous pour participer</a></p>
 <?php endif; ?>

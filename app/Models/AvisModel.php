@@ -20,7 +20,6 @@ class AvisModel
     {
         $collection = $this->getCollection();
 
-        // En NoSQL, on insere un "document" (equivalent d'une ligne, mais flexible)
         $resultat = $collection->insertOne([
             'id_passager'      => $data['id_passager'],
             'pseudo_passager'  => $data['pseudo_passager'],
@@ -28,8 +27,8 @@ class AvisModel
             'pseudo_chauffeur' => $data['pseudo_chauffeur'],
             'note'             => (int) $data['note'],
             'commentaire'      => $data['commentaire'],
-            'statut'           => 'en_attente', // pour la moderation par l'employe
-            'date'             => new UTCDateTime(), // date et heure actuelles
+            'statut'           => 'en_attente',
+            'date'             => new UTCDateTime(),
         ]);
 
         return $resultat->getInsertedCount() === 1;
@@ -46,6 +45,27 @@ class AvisModel
         return $curseur->toArray();
     }
 
+    // Calcule la note moyenne d'un chauffeur (sur ses avis valides)
+    // Retourne null s'il n'a aucun avis valide
+    public function moyenneChauffeur(int $idChauffeur): ?float
+    {
+        $avis = $this->findValidesByChauffeur($idChauffeur);
+
+        // Aucun avis -> pas de moyenne
+        if (empty($avis)) {
+            return null;
+        }
+
+        // On additionne toutes les notes
+        $total = 0;
+        foreach ($avis as $unAvis) {
+            $total += $unAvis['note'];
+        }
+
+        // Moyenne arrondie a 1 decimale
+        return round($total / count($avis), 1);
+    }
+
     // Recupere tous les avis EN ATTENTE (pour la moderation employe)
     public function findEnAttente(): array
     {
@@ -55,18 +75,13 @@ class AvisModel
     }
 
     // Change le statut d'un avis (valide ou refuse) - pour la moderation
-    // $id est l'identifiant Mongo (_id) sous forme de chaine
     public function changerStatut(string $id, string $nouveauStatut): bool
     {
         $collection = $this->getCollection();
-
-        // updateOne : on cible le document par son _id et on modifie son statut
         $resultat = $collection->updateOne(
-            ['_id' => new ObjectId($id)],          // filtre : quel document
-            ['$set' => ['statut' => $nouveauStatut]] // modification a appliquer
+            ['_id' => new ObjectId($id)],
+            ['$set' => ['statut' => $nouveauStatut]]
         );
-
-        // getModifiedCount = 1 si un document a bien ete modifie
         return $resultat->getModifiedCount() === 1;
     }
 }
