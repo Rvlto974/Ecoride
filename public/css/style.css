@@ -1,21 +1,19 @@
 /* ===== EcoRide - Feuille de style principale ===== */
 /* Charte "recyclee" : kraft, bois, terre, accent terracotta, touche verte ecolo */
 
-/* Variables de couleurs (centralisees : un seul endroit a modifier) */
 :root {
-    --brun-principal: #6E5A3E;   /* bois / kraft : menu, titres */
-    --brun-fonce: #54442E;       /* survol, footer */
-    --terracotta: #B5734A;       /* accent : boutons d'action */
-    --terracotta-fonce: #93582F; /* survol des boutons */
-    --kraft-clair: #EDE6D6;      /* fond doux : cartes claires, badges */
-    --creme: #FBF8F1;            /* fond de page */
+    --brun-principal: #6E5A3E;
+    --brun-fonce: #54442E;
+    --terracotta: #B5734A;
+    --terracotta-fonce: #93582F;
+    --kraft-clair: #EDE6D6;
+    --creme: #FBF8F1;
     --blanc: #FFFFFF;
-    --vert-ecolo: #5C7A4A;       /* touche verte : badge ecologique */
-    --texte: #3D3528;            /* brun tres fonce pour le texte */
-    --bordure: #E0D7C4;          /* bordures douces */
+    --vert-ecolo: #5C7A4A;
+    --texte: #3D3528;
+    --bordure: #E0D7C4;
 }
 
-/* Reset de base */
 * {
     margin: 0;
     padding: 0;
@@ -56,7 +54,6 @@ header nav a:hover {
     opacity: 0.75;
 }
 
-/* Le premier lien (logo EcoRide) plus gros */
 header nav a:first-child {
     font-size: 1.4rem;
     font-weight: 700;
@@ -89,10 +86,91 @@ p {
     margin-bottom: 0.75rem;
 }
 
-/* Liens dans le contenu */
 main a {
     color: var(--terracotta-fonce);
     font-weight: 500;
+}
+
+/* ===== Banniere d'accueil ===== */
+.banniere {
+    background-color: var(--kraft-clair);
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    padding: 2.75rem 2rem;
+    text-align: center;
+}
+
+.banniere-marque {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--terracotta);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.banniere-titre {
+    font-size: 2.1rem;
+    color: var(--brun-principal);
+    margin-bottom: 0.5rem;
+}
+
+.banniere-soustitre {
+    font-size: 1.05rem;
+    color: var(--texte);
+    margin-bottom: 1.75rem;
+}
+
+/* Barre de recherche dans la banniere */
+.banniere-recherche {
+    display: flex;
+    gap: 8px;
+    max-width: 540px;
+    margin: 0 auto 2rem;
+    flex-wrap: wrap;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.banniere-recherche input {
+    flex: 1;
+    min-width: 130px;
+    padding: 0.75rem;
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+    background-color: var(--blanc);
+    margin-bottom: 0;
+}
+
+.banniere-recherche button {
+    flex-shrink: 0;
+}
+
+/* Chiffres-cles */
+.banniere-chiffres {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--bordure);
+    padding-top: 1.5rem;
+}
+
+.chiffre {
+    text-align: center;
+}
+
+.chiffre-valeur {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--brun-principal);
+}
+
+.chiffre-label {
+    font-size: 0.85rem;
+    color: #8a7d68;
 }
 
 /* ===== Formulaires ===== */
@@ -160,7 +238,6 @@ ul {
     font-size: 1.15rem;
 }
 
-/* Liens dans les cartes */
 li a {
     color: var(--terracotta-fonce);
     font-weight: 500;

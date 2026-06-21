@@ -1,6 +1,29 @@
-<!-- Contenu specifique de la page d'accueil -->
-<h1>EcoRide</h1>
-<p>Bienvenue sur EcoRide, la plateforme de covoiturage ecologique.</p>
-<p>Trouvez un trajet pres de chez vous et voyagez de maniere responsable.</p>
+<!-- Page d'accueil : banniere avec recherche integree -->
+<section class="banniere">
+    <p class="banniere-marque">EcoRide</p>
+    <h1 class="banniere-titre">Roulez malin, roulez vert</h1>
+    <p class="banniere-soustitre">Le covoiturage responsable, economique et convivial.</p>
 
-<p><a href="/covoiturages">Voir les covoiturages disponibles</a></p>
+    <!-- Recherche rapide : envoie vers la page covoiturages (methode GET) -->
+    <form action="/covoiturages" method="get" class="banniere-recherche" role="search">
+        <input type="text" name="depart" placeholder="Ville de depart" aria-label="Ville de depart">
+        <input type="text" name="arrivee" placeholder="Ville d'arrivee" aria-label="Ville d'arrivee">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <!-- Chiffres-cles -->
+    <div class="banniere-chiffres">
+        <div class="chiffre">
+            <span class="chiffre-valeur">20</span>
+            <span class="chiffre-label">credits offerts</span>
+        </div>
+        <div class="chiffre">
+            <span class="chiffre-valeur">100%</span>
+            <span class="chiffre-label">trajets verifies</span>
+        </div>
+        <div class="chiffre">
+            <span class="chiffre-valeur">0 CO&#8322;</span>
+            <span class="chiffre-label">en covoiturage electrique</span>
+        </div>
+    </div>
+</section>
