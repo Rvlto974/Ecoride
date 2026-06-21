@@ -1,5 +1,6 @@
 <h1>Covoiturages disponibles</h1>
 
+<!-- Recherche classique par ville et date (rechargement de page) -->
 <form action="/covoiturages" method="get" role="search">
     <p>
         <label for="depart">Ville de depart</label><br>
@@ -18,22 +19,39 @@
 
 <hr>
 
-<?php if (empty($covoiturages)): ?>
-    <p>Aucun covoiturage disponible pour ces criteres.</p>
-<?php else: ?>
-    <ul>
-        <?php foreach ($covoiturages as $trajet): ?>
-            <li>
-                <strong><?= htmlspecialchars($trajet['ville_depart']) ?> &rarr; <?= htmlspecialchars($trajet['ville_arrivee']) ?></strong><br>
-                Depart : <?= htmlspecialchars($trajet['depart']) ?><br>
-                Prix : <?= htmlspecialchars((string) $trajet['prix']) ?> credits<br>
-                Places : <?= htmlspecialchars((string) $trajet['nb_places']) ?><br>
-                Chauffeur : <?= htmlspecialchars($trajet['chauffeur']) ?><br>
-                Vehicule : <?= htmlspecialchars($trajet['vehicule_marque']) ?> <?= htmlspecialchars($trajet['vehicule_modele']) ?>
-                <?php if ($trajet['vehicule_energie'] === 'electrique'): ?>
-                    &#127807; Ecologique
-                <?php endif; ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+<!-- Filtres dynamiques (AJAX : mise a jour sans recharger la page) -->
+<fieldset>
+    <legend>Filtres</legend>
+    <p>
+        <input type="checkbox" id="filtre-eco">
+        <label for="filtre-eco">Trajets ecologiques uniquement</label>
+    </p>
+    <p>
+        <label for="filtre-prix">Prix maximum (credits)</label><br>
+        <input type="number" id="filtre-prix" min="0">
+    </p>
+    <p>
+        <label for="filtre-places">Places minimum</label><br>
+        <input type="number" id="filtre-places" min="1">
+    </p>
+</fieldset>
+
+<!-- Zone des resultats : c'est ce que le JavaScript va mettre a jour -->
+<ul id="resultats">
+    <?php foreach ($covoiturages as $trajet): ?>
+        <li>
+            <strong><?= htmlspecialchars($trajet['ville_depart']) ?> &rarr; <?= htmlspecialchars($trajet['ville_arrivee']) ?></strong><br>
+            Depart : <?= htmlspecialchars($trajet['depart']) ?><br>
+            Prix : <?= htmlspecialchars((string) $trajet['prix']) ?> credits<br>
+            Places : <?= htmlspecialchars((string) $trajet['nb_places']) ?><br>
+            Chauffeur : <?= htmlspecialchars($trajet['chauffeur']) ?><br>
+            Vehicule : <?= htmlspecialchars($trajet['vehicule_marque']) ?> <?= htmlspecialchars($trajet['vehicule_modele']) ?>
+            <?php if ($trajet['vehicule_energie'] === 'electrique'): ?>
+                &#127807; Ecologique
+            <?php endif; ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
+<!-- On charge le script qui gere les filtres AJAX -->
+<script src="/js/covoiturages.js"></script>

@@ -16,3 +16,6 @@ $router->get('/deconnexion', [AuthController::class, 'logout']);
 
 // Liste des covoiturages
 $router->get('/covoiturages', [CovoiturageController::class, 'index']);
+
+// API JSON pour les filtres AJAX
+$router->get('/api/covoiturages', [CovoiturageController::class, 'api']);

@@ -34,4 +34,24 @@ class CovoiturageController extends Controller
             'date' => $date,
         ]);
     }
+    // Point d'entree API : renvoie les covoiturages filtres en JSON (pour l'AJAX)
+    public function api(): void
+    {
+        $covoiturageModel = new CovoiturageModel();
+
+        // On recupere les filtres depuis l'URL (GET)
+        $filtres = [
+            'eco'        => $_GET['eco'] ?? '',
+            'prix_max'   => $_GET['prix_max'] ?? '',
+            'places_min' => $_GET['places_min'] ?? '',
+        ];
+
+        $covoiturages = $covoiturageModel->searchFiltered($filtres);
+
+        // On indique au navigateur qu'on renvoie du JSON (et pas du HTML)
+        header('Content-Type: application/json');
+
+        // On convertit le tableau PHP en JSON et on l'affiche
+        echo json_encode($covoiturages);
+    }
 }
