@@ -11,6 +11,7 @@ class HomeController extends Controller
     {
         $this->view('home/index', [
             'titre' => 'EcoRide - Accueil',
+            'utilisateur' => $_SESSION['user'] ?? null,
         ]);
     }
 }
