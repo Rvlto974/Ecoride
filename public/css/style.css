@@ -285,3 +285,56 @@ footer {
 footer a {
     color: var(--kraft-clair);
 }
+
+/* ===== Tableau de bord admin ===== */
+.stats-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-carte {
+    background-color: var(--blanc);
+    border: 1px solid var(--bordure);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-valeur {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #8a7d68;
+}
+
+/* Tableau de statistiques */
+.stats-table {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;
+    background-color: var(--blanc);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stats-table th {
+    background-color: var(--brun-principal);
+    color: var(--blanc);
+    text-align: left;
+    padding: 0.75rem 1rem;
+}
+
+.stats-table td {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--bordure);
+}
