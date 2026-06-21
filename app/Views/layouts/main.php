@@ -17,6 +17,7 @@
             <?php if (isset($_SESSION['user'])): ?>
                 <!-- Connecte : pseudo + credits + deconnexion -->
                 <span>Bonjour <?= htmlspecialchars($_SESSION['user']['pseudo']) ?> (<?= htmlspecialchars((string) $_SESSION['user']['credits']) ?> credits)</span>
+                <a href="/mon-espace">Mon espace</a>
                 <a href="/deconnexion">Deconnexion</a>
             <?php else: ?>
                 <!-- Visiteur : connexion / inscription -->

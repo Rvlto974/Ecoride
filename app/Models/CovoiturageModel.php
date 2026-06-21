@@ -203,4 +203,29 @@ class CovoiturageModel extends Model
             return ['succes' => false, 'message' => 'Une erreur est survenue, veuillez reessayer.'];
         }
     }
+    // Recupere les covoiturages auxquels un utilisateur participe (son historique)
+    public function findParticipations(int $idUtilisateur): array
+    {
+        // On joint participation -> covoiturage -> chauffeur/vehicule/marque
+        // pour afficher les details de chaque trajet reserve
+        $sql = 'SELECT c.*,
+                       u.pseudo AS chauffeur,
+                       v.modele AS vehicule_modele,
+                       v.energie AS vehicule_energie,
+                       m.libelle AS vehicule_marque,
+                       p.credits_utilises,
+                       p.statut AS participation_statut,
+                       p.date_confirmation
+                FROM participation p
+                JOIN covoiturage c ON p.id_covoiturage = c.id_covoiturage
+                JOIN utilisateur u ON c.id_utilisateur = u.id_utilisateur
+                JOIN vehicule v ON c.id_vehicule = v.id_vehicule
+                JOIN marque m ON v.id_marque = m.id_marque
+                WHERE p.id_utilisateur = :id
+                ORDER BY p.date_confirmation DESC';
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $idUtilisateur]);
+        return $stmt->fetchAll();
+    }
 }
