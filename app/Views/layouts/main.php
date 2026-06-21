@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Titre dynamique : chaque page envoie son propre $titre -->
     <title><?= htmlspecialchars($titre ?? 'EcoRide') ?></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <!-- ===== EN-TETE + MENU (commun a toutes les pages) ===== -->
