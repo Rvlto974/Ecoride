@@ -338,3 +338,21 @@ footer a {
     padding: 0.75rem 1rem;
     border-top: 1px solid var(--bordure);
 }
+
+/* ===== Textarea (commentaires d'avis) ===== */
+textarea {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--bordure);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    margin-bottom: 0.5rem;
+    background-color: var(--creme);
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--terracotta);
+}

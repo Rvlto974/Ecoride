@@ -1,6 +1,14 @@
 <!-- Espace utilisateur : profil + historique -->
 <h1>Mon espace</h1>
 
+<!-- Message flash (ex : avis envoye) -->
+<?php if (!empty($_SESSION['message'])): ?>
+    <div role="alert">
+        <p><?= htmlspecialchars($_SESSION['message']) ?></p>
+    </div>
+    <?php unset($_SESSION['message']); ?>
+<?php endif; ?>
+
 <!-- Rappel des infos du compte (depuis la session) -->
 <h2>Mon profil</h2>
 <ul>
@@ -8,6 +16,13 @@
     <li>Role : <?= htmlspecialchars($_SESSION['user']['role']) ?></li>
     <li>Credits : <?= htmlspecialchars((string) $_SESSION['user']['credits']) ?></li>
 </ul>
+
+<!-- Liens rapides vers les actions chauffeur -->
+<h2>Actions</h2>
+<p>
+    <a href="/vehicule/ajouter">Ajouter un vehicule</a> &nbsp;|&nbsp;
+    <a href="/voyage/creer">Proposer un voyage</a>
+</p>
 
 <h2>Mes trajets reserves</h2>
 
@@ -25,6 +40,9 @@
                 Credits utilises : <?= htmlspecialchars((string) $trajet['credits_utilises']) ?><br>
                 Statut : <?= htmlspecialchars($trajet['participation_statut']) ?><br>
                 <a href="/covoiturage/<?= htmlspecialchars((string) $trajet['id_covoiturage']) ?>">Voir le detail</a>
+                &nbsp;|&nbsp;
+                <!-- Bouton pour laisser un avis sur ce trajet -->
+                <a href="/avis/<?= htmlspecialchars((string) $trajet['id_covoiturage']) ?>">Laisser un avis</a>
             </li>
         <?php endforeach; ?>
     </ul>

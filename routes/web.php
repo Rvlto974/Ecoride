@@ -8,6 +8,7 @@ use App\Controllers\VehiculeController;
 use App\Controllers\VoyageController;
 use App\Controllers\AdminController;
 use App\Controllers\EmployeController;
+use App\Controllers\AvisController;
 
 /** @var \App\Core\Router $router */
 
@@ -36,6 +37,10 @@ $router->post('/vehicule/ajouter', [VehiculeController::class, 'ajouter']);
 // Saisie de voyage (chauffeur)
 $router->get('/voyage/creer', [VoyageController::class, 'creerForm']);
 $router->post('/voyage/creer', [VoyageController::class, 'creer']);
+
+// Avis (laisser un avis sur un trajet)
+$router->get('/avis/{id}', [AvisController::class, 'formulaire']);
+$router->post('/avis/{id}/enregistrer', [AvisController::class, 'enregistrer']);
 
 // Espace administrateur
 $router->get('/admin', [AdminController::class, 'dashboard']);
