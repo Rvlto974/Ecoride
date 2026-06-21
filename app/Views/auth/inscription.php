@@ -9,14 +9,24 @@
     <main>
         <h1>Inscription</h1>
 
+        <?php if (!empty($erreurs)): ?>
+            <div role="alert">
+                <ul>
+                    <?php foreach ($erreurs as $erreur): ?>
+                        <li><?= htmlspecialchars($erreur) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
         <form action="/inscription" method="post">
             <p>
                 <label for="pseudo">Pseudo</label><br>
-                <input type="text" id="pseudo" name="pseudo" required>
+                <input type="text" id="pseudo" name="pseudo" value="<?= htmlspecialchars($pseudo ?? '') ?>" required>
             </p>
             <p>
                 <label for="email">Email</label><br>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="<?= htmlspecialchars($email ?? '') ?>" required>
             </p>
             <p>
                 <label for="mot_de_passe">Mot de passe</label><br>
