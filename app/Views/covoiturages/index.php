@@ -49,6 +49,9 @@
             <?php if ($trajet['vehicule_energie'] === 'electrique'): ?>
                 &#127807; Ecologique
             <?php endif; ?>
+            <br>
+            <!-- Lien vers la page detaillee de ce trajet -->
+            <a href="/covoiturage/<?= htmlspecialchars((string) $trajet['id_covoiturage']) ?>">Voir le detail</a>
         </li>
     <?php endforeach; ?>
 </ul>

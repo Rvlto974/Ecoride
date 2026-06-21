@@ -54,4 +54,23 @@ class CovoiturageController extends Controller
         // On convertit le tableau PHP en JSON et on l'affiche
         echo json_encode($covoiturages);
     }
+    // Affiche le detail d'un covoiturage (route /covoiturage/{id})
+    // Le parametre $id vient de l'URL, capture par le routeur
+    public function detail(string $id): void
+    {
+        $covoiturageModel = new CovoiturageModel();
+        $covoiturage = $covoiturageModel->findById((int) $id);
+
+        // Si l'id n'existe pas -> page 404
+        if ($covoiturage === null) {
+            http_response_code(404);
+            $this->view('errors/404', ['titre' => 'Covoiturage introuvable']);
+            return;
+        }
+
+        $this->view('covoiturages/detail', [
+            'titre' => 'EcoRide - Detail du trajet',
+            'covoiturage' => $covoiturage,
+        ]);
+    }
 }

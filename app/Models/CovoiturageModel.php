@@ -96,4 +96,29 @@ class CovoiturageModel extends Model
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
+    // Recupere UN covoiturage precis par son id (pour la vue detaillee)
+    public function findById(int $id): ?array
+    {
+        // Memes jointures, mais on filtre sur l'id du covoiturage
+        // On ajoute aussi l'energie et la date de 1ere immat du vehicule pour le detail
+        $sql = 'SELECT c.*,
+                       u.pseudo AS chauffeur,
+                       v.modele AS vehicule_modele,
+                       v.energie AS vehicule_energie,
+                       v.couleur AS vehicule_couleur,
+                       v.nb_places AS vehicule_nb_places,
+                       m.libelle AS vehicule_marque
+                FROM covoiturage c
+                JOIN utilisateur u ON c.id_utilisateur = u.id_utilisateur
+                JOIN vehicule v ON c.id_vehicule = v.id_vehicule
+                JOIN marque m ON v.id_marque = m.id_marque
+                WHERE c.id_covoiturage = :id';
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $covoiturage = $stmt->fetch();
+
+        // null si aucun trajet trouve (id inexistant)
+        return $covoiturage ?: null;
+    }
 }

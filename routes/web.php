@@ -19,3 +19,6 @@ $router->get('/covoiturages', [CovoiturageController::class, 'index']);
 
 // API JSON pour les filtres AJAX
 $router->get('/api/covoiturages', [CovoiturageController::class, 'api']);
+
+// Detail d'un covoiturage (id dynamique dans l'URL)
+$router->get('/covoiturage/{id}', [CovoiturageController::class, 'detail']);
