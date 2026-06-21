@@ -10,7 +10,6 @@ class CovoiturageModel extends Model
     // Recupere tous les covoiturages disponibles (avec infos chauffeur + vehicule)
     public function findAll(): array
     {
-        // Jointures : covoiturage -> utilisateur (chauffeur), vehicule, marque
         $sql = 'SELECT c.*,
                        u.pseudo AS chauffeur,
                        v.modele AS vehicule_modele,
@@ -30,7 +29,6 @@ class CovoiturageModel extends Model
     // Recherche les covoiturages selon depart, arrivee et date
     public function search(string $depart, string $arrivee, string $date): array
     {
-        // Memes jointures que findAll, mais avec des filtres (requete preparee)
         $sql = 'SELECT c.*,
                        u.pseudo AS chauffeur,
                        v.modele AS vehicule_modele,
@@ -48,7 +46,6 @@ class CovoiturageModel extends Model
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
-            // Le % permet une recherche partielle (ex : "lyon" trouve "Lyon")
             'depart'  => '%' . $depart . '%',
             'arrivee' => '%' . $arrivee . '%',
             'date'    => $date,
@@ -57,11 +54,9 @@ class CovoiturageModel extends Model
         return $stmt->fetchAll();
     }
 
-    // Recherche avec filtres avances (pour l'AJAX)
-    // $filtres est un tableau : eco, prix_max, places_min
+    // Recherche avec filtres avances (pour l'AJAX) : eco, prix_max, places_min
     public function searchFiltered(array $filtres): array
     {
-        // On part de la requete de base avec les jointures
         $sql = 'SELECT c.*,
                        u.pseudo AS chauffeur,
                        v.modele AS vehicule_modele,
@@ -75,19 +70,14 @@ class CovoiturageModel extends Model
 
         $params = [];
 
-        // Filtre ecologique : seulement les vehicules electriques
         if (!empty($filtres['eco'])) {
             $sql .= ' AND v.energie = :energie';
             $params['energie'] = 'electrique';
         }
-
-        // Filtre prix maximum
         if (!empty($filtres['prix_max'])) {
             $sql .= ' AND c.prix <= :prix_max';
             $params['prix_max'] = (int) $filtres['prix_max'];
         }
-
-        // Filtre nombre de places minimum
         if (!empty($filtres['places_min'])) {
             $sql .= ' AND c.nb_places >= :places_min';
             $params['places_min'] = (int) $filtres['places_min'];
@@ -95,7 +85,6 @@ class CovoiturageModel extends Model
 
         $sql .= ' ORDER BY c.depart ASC';
 
-        // Requete preparee avec les filtres actifs
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
@@ -104,7 +93,6 @@ class CovoiturageModel extends Model
     // Recupere UN covoiturage precis par son id (pour la vue detaillee)
     public function findById(int $id): ?array
     {
-        // Memes jointures, mais on filtre sur l'id du covoiturage
         $sql = 'SELECT c.*,
                        u.pseudo AS chauffeur,
                        v.modele AS vehicule_modele,
@@ -122,37 +110,30 @@ class CovoiturageModel extends Model
         $stmt->execute(['id' => $id]);
         $covoiturage = $stmt->fetch();
 
-        // null si aucun trajet trouve (id inexistant)
         return $covoiturage ?: null;
     }
 
     // Inscrit un passager a un covoiturage (transaction : tout ou rien)
-    // Retourne un tableau : succes (bool), message (string), et credits si succes
     public function participer(int $idCovoiturage, int $idUtilisateur): array
     {
-        // On recupere le trajet pour verifier places + prix
         $covoiturage = $this->findById($idCovoiturage);
         if ($covoiturage === null) {
             return ['succes' => false, 'message' => 'Ce covoiturage n existe pas.'];
         }
 
-        // Verification : reste-t-il des places ?
         if ($covoiturage['nb_places'] <= 0) {
             return ['succes' => false, 'message' => 'Il n y a plus de places disponibles.'];
         }
 
-        // On recupere les credits de l'utilisateur
         $sql = 'SELECT credits FROM utilisateur WHERE id_utilisateur = :id';
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['id' => $idUtilisateur]);
         $user = $stmt->fetch();
 
-        // Verification : assez de credits ?
         if ($user['credits'] < $covoiturage['prix']) {
             return ['succes' => false, 'message' => 'Vous n avez pas assez de credits.'];
         }
 
-        // Verification : ne participe-t-il pas deja ?
         $sql = 'SELECT COUNT(*) AS total FROM participation
                 WHERE id_utilisateur = :user AND id_covoiturage = :covoit';
         $stmt = $this->db->prepare($sql);
@@ -187,10 +168,8 @@ class CovoiturageModel extends Model
             $stmt = $this->db->prepare($sql);
             $stmt->execute(['id' => $idCovoiturage]);
 
-            // Tout a reussi -> on valide la transaction
             $this->db->commit();
 
-            // On renvoie aussi le nouveau solde de credits (prix deduit)
             return [
                 'succes' => true,
                 'message' => 'Participation confirmee !',
@@ -198,16 +177,14 @@ class CovoiturageModel extends Model
             ];
 
         } catch (\Exception $e) {
-            // Une operation a echoue -> on annule tout
             $this->db->rollBack();
             return ['succes' => false, 'message' => 'Une erreur est survenue, veuillez reessayer.'];
         }
     }
+
     // Recupere les covoiturages auxquels un utilisateur participe (son historique)
     public function findParticipations(int $idUtilisateur): array
     {
-        // On joint participation -> covoiturage -> chauffeur/vehicule/marque
-        // pour afficher les details de chaque trajet reserve
         $sql = 'SELECT c.*,
                        u.pseudo AS chauffeur,
                        v.modele AS vehicule_modele,
@@ -227,5 +204,27 @@ class CovoiturageModel extends Model
         $stmt = $this->db->prepare($sql);
         $stmt->execute(['id' => $idUtilisateur]);
         return $stmt->fetchAll();
+    }
+
+    // Cree un nouveau covoiturage propose par un chauffeur
+    public function creer(array $data, int $idUtilisateur): bool
+    {
+        $sql = 'INSERT INTO covoiturage
+                (ville_depart, ville_arrivee, depart, arrivee, prix, nb_places, statut, id_vehicule, id_utilisateur)
+                VALUES
+                (:depart_ville, :arrivee_ville, :depart, :arrivee, :prix, :places, :statut, :vehicule, :user)';
+
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute([
+            'depart_ville'  => $data['ville_depart'],
+            'arrivee_ville' => $data['ville_arrivee'],
+            'depart'        => $data['depart'],
+            'arrivee'       => $data['arrivee'],
+            'prix'          => (int) $data['prix'],
+            'places'        => (int) $data['nb_places'],
+            'statut'        => 'en_attente',
+            'vehicule'      => (int) $data['id_vehicule'],
+            'user'          => $idUtilisateur,
+        ]);
     }
 }

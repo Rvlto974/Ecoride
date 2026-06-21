@@ -5,6 +5,7 @@ use App\Controllers\AuthController;
 use App\Controllers\CovoiturageController;
 use App\Controllers\ProfilController;
 use App\Controllers\VehiculeController;
+use App\Controllers\VoyageController;
 
 /** @var \App\Core\Router $router */
 
@@ -29,3 +30,7 @@ $router->get('/mon-espace', [ProfilController::class, 'index']);
 // Gestion des vehicules (chauffeur)
 $router->get('/vehicule/ajouter', [VehiculeController::class, 'ajouterForm']);
 $router->post('/vehicule/ajouter', [VehiculeController::class, 'ajouter']);
+
+// Saisie de voyage (chauffeur)
+$router->get('/voyage/creer', [VoyageController::class, 'creerForm']);
+$router->post('/voyage/creer', [VoyageController::class, 'creer']);
