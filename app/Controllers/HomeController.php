@@ -14,4 +14,12 @@ class HomeController extends Controller
             'titre' => 'EcoRide - Accueil',
         ]);
     }
+
+    // Affiche la page des mentions legales (page statique)
+    public function mentionsLegales(): void
+    {
+        $this->view('home/mentions', [
+            'titre' => 'EcoRide - Mentions legales',
+        ]);
+    }
 }

@@ -13,6 +13,7 @@ use App\Controllers\AvisController;
 /** @var \App\Core\Router $router */
 
 $router->get('/', [HomeController::class, 'index']);
+$router->get('/mentions-legales', [HomeController::class, 'mentionsLegales']);
 
 // Authentification
 $router->get('/inscription', [AuthController::class, 'registerForm']);
