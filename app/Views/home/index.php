@@ -12,6 +12,8 @@
 
     <main>
         <p>Bienvenue sur EcoRide, la plateforme de covoiturage ecologique.</p>
-    </main>
+</main>
 </body>
 </html>
+
+

@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index(): void
     {
         $this->view('home/index', [
-            'titre' => 'EcoRide - Covoiturage ecologique',
+            'titre' => 'EcoRide - Accueil',
         ]);
     }
 }
