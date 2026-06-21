@@ -45,6 +45,11 @@ $router->post('/avis/{id}/enregistrer', [AvisController::class, 'enregistrer']);
 
 // Espace administrateur
 $router->get('/admin', [AdminController::class, 'dashboard']);
+$router->get('/admin/comptes', [AdminController::class, 'comptes']);
+$router->get('/admin/employe/creer', [AdminController::class, 'creerEmployeForm']);
+$router->post('/admin/employe/creer', [AdminController::class, 'creerEmploye']);
+$router->post('/admin/compte/{id}/suspendre', [AdminController::class, 'suspendre']);
+$router->post('/admin/compte/{id}/reactiver', [AdminController::class, 'reactiver']);
 
 // Espace employe : moderation des avis
 $router->get('/employe/moderation', [EmployeController::class, 'moderation']);
