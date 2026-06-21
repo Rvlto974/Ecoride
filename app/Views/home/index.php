@@ -1,7 +1,17 @@
-<!-- Contenu specifique de la page d'accueil -->
-<!-- Le HTML autour (head, menu, footer) vient du layout main.php -->
-<h1>EcoRide</h1>
-<p>Bienvenue sur EcoRide, la plateforme de covoiturage ecologique.</p>
-<p>Trouvez un trajet pres de chez vous et voyagez de maniere responsable.</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($titre ?? 'EcoRide') ?></title>
+</head>
+<body>
+    <header>
+        <h1>EcoRide</h1>
+    </header>
 
-<p><a href="/covoiturages">Voir les covoiturages disponibles</a></p>
+    <main>
+        <p>Bienvenue sur EcoRide, la plateforme de covoiturage ecologique.</p>
+    </main>
+</body>
+</html>

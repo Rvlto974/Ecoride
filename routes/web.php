@@ -22,3 +22,8 @@ $router->post('/covoiturage/{id}/participer', [CovoiturageController::class, 'pa
 
 // Espace utilisateur
 $router->get('/mon-espace', [ProfilController::class, 'index']);
+use App\Controllers\HomeController;
+
+/** @var \App\Core\Router $router */
+
+$router->get('/', [HomeController::class, 'index']);
