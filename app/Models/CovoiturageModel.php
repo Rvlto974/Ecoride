@@ -10,7 +10,6 @@ class CovoiturageModel extends Model
     // Recupere tous les covoiturages disponibles (avec infos chauffeur + vehicule)
     public function findAll(): array
     {
-        // Jointures : covoiturage -> utilisateur (chauffeur), vehicule, marque
         $sql = 'SELECT c.*,
                        u.pseudo AS chauffeur,
                        v.modele AS vehicule_modele,
@@ -24,6 +23,34 @@ class CovoiturageModel extends Model
                 ORDER BY c.depart ASC';
 
         $stmt = $this->db->query($sql);
+        return $stmt->fetchAll();
+    }
+
+    // Recherche les covoiturages selon depart, arrivee et date
+    public function search(string $depart, string $arrivee, string $date): array
+    {
+        $sql = 'SELECT c.*,
+                       u.pseudo AS chauffeur,
+                       v.modele AS vehicule_modele,
+                       v.energie AS vehicule_energie,
+                       m.libelle AS vehicule_marque
+                FROM covoiturage c
+                JOIN utilisateur u ON c.id_utilisateur = u.id_utilisateur
+                JOIN vehicule v ON c.id_vehicule = v.id_vehicule
+                JOIN marque m ON v.id_marque = m.id_marque
+                WHERE c.nb_places > 0
+                  AND c.ville_depart LIKE :depart
+                  AND c.ville_arrivee LIKE :arrivee
+                  AND DATE(c.depart) = :date
+                ORDER BY c.depart ASC';
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            'depart'  => '%' . $depart . '%',
+            'arrivee' => '%' . $arrivee . '%',
+            'date'    => $date,
+        ]);
+
         return $stmt->fetchAll();
     }
 }

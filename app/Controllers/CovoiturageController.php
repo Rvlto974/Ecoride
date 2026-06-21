@@ -8,17 +8,30 @@ use App\Models\CovoiturageModel;
 
 class CovoiturageController extends Controller
 {
-    // Affiche la liste des covoiturages disponibles
+    // Affiche la liste des covoiturages (avec recherche optionnelle)
     public function index(): void
     {
-        // On instancie le modele et on recupere tous les trajets
         $covoiturageModel = new CovoiturageModel();
-        $covoiturages = $covoiturageModel->findAll();
 
-        // On passe la liste a la vue
+        // On recupere les criteres de recherche depuis l'URL (GET)
+        $depart  = trim($_GET['depart'] ?? '');
+        $arrivee = trim($_GET['arrivee'] ?? '');
+        $date    = trim($_GET['date'] ?? '');
+
+        // Si les 3 criteres sont remplis -> recherche filtree, sinon -> tout afficher
+        if ($depart !== '' && $arrivee !== '' && $date !== '') {
+            $covoiturages = $covoiturageModel->search($depart, $arrivee, $date);
+        } else {
+            $covoiturages = $covoiturageModel->findAll();
+        }
+
         $this->view('covoiturages/index', [
             'titre' => 'EcoRide - Covoiturages',
             'covoiturages' => $covoiturages,
+            // On renvoie les criteres pour pre-remplir le formulaire
+            'depart' => $depart,
+            'arrivee' => $arrivee,
+            'date' => $date,
         ]);
     }
 }

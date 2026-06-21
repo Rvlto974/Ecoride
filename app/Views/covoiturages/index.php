@@ -1,11 +1,26 @@
-<!-- Page liste des covoiturages -->
 <h1>Covoiturages disponibles</h1>
 
+<form action="/covoiturages" method="get" role="search">
+    <p>
+        <label for="depart">Ville de depart</label><br>
+        <input type="text" id="depart" name="depart" value="<?= htmlspecialchars($depart ?? '') ?>">
+    </p>
+    <p>
+        <label for="arrivee">Ville d'arrivee</label><br>
+        <input type="text" id="arrivee" name="arrivee" value="<?= htmlspecialchars($arrivee ?? '') ?>">
+    </p>
+    <p>
+        <label for="date">Date</label><br>
+        <input type="date" id="date" name="date" value="<?= htmlspecialchars($date ?? '') ?>">
+    </p>
+    <p><button type="submit">Rechercher</button></p>
+</form>
+
+<hr>
+
 <?php if (empty($covoiturages)): ?>
-    <!-- Cas ou il n'y a aucun trajet -->
-    <p>Aucun covoiturage disponible pour le moment.</p>
+    <p>Aucun covoiturage disponible pour ces criteres.</p>
 <?php else: ?>
-    <!-- On boucle sur chaque trajet recupere en base -->
     <ul>
         <?php foreach ($covoiturages as $trajet): ?>
             <li>
