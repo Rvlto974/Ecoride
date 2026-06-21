@@ -16,8 +16,14 @@
 
             <!-- Menu dynamique : on lit la session pour savoir si connecte -->
             <?php if (isset($_SESSION['user'])): ?>
-                <!-- Connecte : pseudo + credits + deconnexion -->
+                <!-- Connecte : pseudo + credits -->
                 <span>Bonjour <?= htmlspecialchars($_SESSION['user']['pseudo']) ?> (<?= htmlspecialchars((string) $_SESSION['user']['credits']) ?> credits)</span>
+
+                <!-- Lien Administration : visible uniquement pour les administrateurs -->
+                <?php if ($_SESSION['user']['role'] === 'administrateur'): ?>
+                    <a href="/admin">Administration</a>
+                <?php endif; ?>
+
                 <a href="/mon-espace">Mon espace</a>
                 <a href="/deconnexion">Deconnexion</a>
             <?php else: ?>
