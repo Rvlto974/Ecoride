@@ -7,6 +7,7 @@ use App\Controllers\ProfilController;
 use App\Controllers\VehiculeController;
 use App\Controllers\VoyageController;
 use App\Controllers\AdminController;
+use App\Controllers\EmployeController;
 
 /** @var \App\Core\Router $router */
 
@@ -38,3 +39,8 @@ $router->post('/voyage/creer', [VoyageController::class, 'creer']);
 
 // Espace administrateur
 $router->get('/admin', [AdminController::class, 'dashboard']);
+
+// Espace employe : moderation des avis
+$router->get('/employe/moderation', [EmployeController::class, 'moderation']);
+$router->post('/employe/avis/{id}/valider', [EmployeController::class, 'valider']);
+$router->post('/employe/avis/{id}/refuser', [EmployeController::class, 'refuser']);
