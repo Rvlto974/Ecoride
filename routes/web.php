@@ -22,3 +22,6 @@ $router->get('/api/covoiturages', [CovoiturageController::class, 'api']);
 
 // Detail d'un covoiturage (id dynamique dans l'URL)
 $router->get('/covoiturage/{id}', [CovoiturageController::class, 'detail']);
+
+// Participer a un covoiturage (POST)
+$router->post('/covoiturage/{id}/participer', [CovoiturageController::class, 'participer']);

@@ -1,6 +1,13 @@
 <!-- Page detail d'un covoiturage -->
 <p><a href="/covoiturages">&larr; Retour aux covoiturages</a></p>
 
+<!-- Message flash (succes ou erreur de participation) -->
+<?php if (!empty($message)): ?>
+    <div role="alert">
+        <p><?= htmlspecialchars($message) ?></p>
+    </div>
+<?php endif; ?>
+
 <h1><?= htmlspecialchars($covoiturage['ville_depart']) ?> &rarr; <?= htmlspecialchars($covoiturage['ville_arrivee']) ?></h1>
 
 <!-- Badge ecologique si vehicule electrique -->
@@ -29,11 +36,17 @@
     <li>Nombre de places du vehicule : <?= htmlspecialchars((string) $covoiturage['vehicule_nb_places']) ?></li>
 </ul>
 
-<!-- Bouton participer (la fonctionnalite viendra apres) -->
-<p>
-    <?php if (isset($_SESSION['user'])): ?>
-        <button type="button" disabled>Participer (bientot disponible)</button>
+<!-- Participation -->
+<?php if (isset($_SESSION['user'])): ?>
+    <?php if ($covoiturage['nb_places'] > 0): ?>
+        <!-- Formulaire de participation (POST) : un bouton qui envoie la demande -->
+        <form action="/covoiturage/<?= htmlspecialchars((string) $covoiturage['id_covoiturage']) ?>/participer" method="post">
+            <button type="submit">Participer (<?= htmlspecialchars((string) $covoiturage['prix']) ?> credits)</button>
+        </form>
     <?php else: ?>
-        <a href="/connexion">Connectez-vous pour participer</a>
+        <p>Ce trajet est complet.</p>
     <?php endif; ?>
-</p>
+<?php else: ?>
+    <!-- Visiteur non connecte -->
+    <p><a href="/connexion">Connectez-vous pour participer</a></p>
+<?php endif; ?>
