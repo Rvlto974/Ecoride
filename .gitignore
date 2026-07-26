@@ -7,3 +7,7 @@ Thumbs.db
 Thumbs.db
 *.log
 *.docx
+
+# Fichiers de dépannage temporaires
+seed_test.sql
+reset_pass.php
