@@ -53,3 +53,30 @@
         </div>
     </div>
 </section>
+
+<!-- Pourquoi EcoRide -->
+<section class="pourquoi">
+    <h2 class="pourquoi-titre">Pourquoi EcoRide ?</h2>
+    <div class="pourquoi-grille">
+        <div class="pourquoi-carte">
+            <div class="pourquoi-icone">🌱</div>
+            <h3 class="pourquoi-carte-titre">Ecologique</h3>
+            <p class="pourquoi-carte-texte">Trajets en vehicules electriques, empreinte carbone reduite.</p>
+        </div>
+        <div class="pourquoi-carte">
+            <div class="pourquoi-icone">💰</div>
+            <h3 class="pourquoi-carte-titre">Economique</h3>
+            <p class="pourquoi-carte-texte">Un systeme de credits simple pour voyager a petit prix.</p>
+        </div>
+        <div class="pourquoi-carte">
+            <div class="pourquoi-icone">🛡️</div>
+            <h3 class="pourquoi-carte-titre">Securise</h3>
+            <p class="pourquoi-carte-texte">Conducteurs notes, avis verifies et comptes moderes.</p>
+        </div>
+        <div class="pourquoi-carte">
+            <div class="pourquoi-icone">😊</div>
+            <h3 class="pourquoi-carte-titre">Convivial</h3>
+            <p class="pourquoi-carte-texte">Choisissez vos preferences et voyagez en bonne compagnie.</p>
+        </div>
+    </div>
+</section>

@@ -471,7 +471,7 @@ textarea:focus {
 
 .hiw-etapes {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 
@@ -505,6 +505,60 @@ textarea:focus {
 
 .hiw-etape-texte {
     font-size: 0.9rem;
+    color: #8a7d68;
+    line-height: 1.5;
+}
+
+/* ===== Section "Pourquoi EcoRide" ===== */
+.pourquoi {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.pourquoi-titre {
+    font-family: var(--font-titre);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--brun-principal);
+    margin-bottom: 1.5rem;
+}
+
+.pourquoi-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.pourquoi-carte {
+    background-color: var(--blanc);
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.pourquoi-icone {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background-color: var(--kraft-clair);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+}
+
+.pourquoi-carte-titre {
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--brun-principal);
+    margin-bottom: 0.5rem;
+}
+
+.pourquoi-carte-texte {
+    font-size: 0.85rem;
     color: #8a7d68;
     line-height: 1.5;
 }
