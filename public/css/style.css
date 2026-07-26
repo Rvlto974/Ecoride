@@ -121,6 +121,14 @@ main a {
 }
 
 /* ===== Banniere d'accueil ===== */
+
+.banniere-preuve {
+    color: var(--brun-principal);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
 .banniere {
     background-color: var(--kraft-clair);
     border: 1px solid var(--bordure);
@@ -445,4 +453,58 @@ textarea:focus {
     font-size: 0.8rem;
     color: var(--texte);
     text-align: center;
+}
+
+/* ===== Section "Comment ca marche" ===== */
+.hiw {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.hiw-titre {
+    font-family: var(--font-titre);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--brun-principal);
+    margin-bottom: 1.5rem;
+}
+
+.hiw-etapes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.hiw-etape {
+    background-color: var(--blanc);
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+
+.hiw-icone {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--kraft-clair);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 1rem;
+}
+
+.hiw-etape-titre {
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--brun-principal);
+    margin-bottom: 0.5rem;
+}
+
+.hiw-etape-texte {
+    font-size: 0.9rem;
+    color: #8a7d68;
+    line-height: 1.5;
 }

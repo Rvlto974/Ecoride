@@ -13,6 +13,8 @@
         <button type="submit">Rechercher</button>
     </form>
 
+    <p class="banniere-preuve">⭐⭐⭐⭐⭐ 4.8/5 · plus de 200 conducteurs notés</p>
+
     <!-- Chiffres-cles -->
     <div class="banniere-chiffres">
         <div class="chiffre">
@@ -26,6 +28,28 @@
         <div class="chiffre">
             <span class="chiffre-valeur">0 CO&#8322;</span>
             <span class="chiffre-label">en covoiturage electrique</span>
+        </div>
+    </div>
+</section>
+
+<!-- Comment ca marche -->
+<section class="hiw">
+    <h2 class="hiw-titre">Comment ça marche ?</h2>
+    <div class="hiw-etapes">
+        <div class="hiw-etape">
+            <div class="hiw-icone">🔍</div>
+            <h3 class="hiw-etape-titre">1. Cherchez</h3>
+            <p class="hiw-etape-texte">Indiquez depart et arrivee, trouvez le trajet ideal en un instant.</p>
+        </div>
+        <div class="hiw-etape">
+            <div class="hiw-icone">👤</div>
+            <h3 class="hiw-etape-titre">2. Reservez</h3>
+            <p class="hiw-etape-texte">Choisissez un conducteur note et reservez avec vos credits.</p>
+        </div>
+        <div class="hiw-etape">
+            <div class="hiw-icone">🚗</div>
+            <h3 class="hiw-etape-titre">3. Voyagez</h3>
+            <p class="hiw-etape-texte">Partagez la route, reduisez vos couts et votre empreinte carbone.</p>
         </div>
     </div>
 </section>
