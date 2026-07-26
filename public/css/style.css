@@ -12,6 +12,10 @@
     --vert-ecolo: #5C7A4A;
     --texte: #3D3528;
     --bordure: #E0D7C4;
+
+    /* Typographies */
+    --font-titre: 'Plus Jakarta Sans', sans-serif;
+    --font-texte: 'Mulish', sans-serif;
 }
 
 * {
@@ -20,56 +24,81 @@
     box-sizing: border-box;
 }
 
+html {
+    background-color: var(--creme);
+}
+
 body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-texte);
     color: var(--texte);
     background-color: var(--creme);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
-/* ===== En-tete / menu ===== */
 header {
-    background-color: var(--brun-principal);
+    background-color: var(--blanc);
     padding: 1rem 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    margin: 1rem auto;
+    max-width: 1100px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 header nav {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    max-width: 1100px;
-    margin: 0 auto;
     flex-wrap: wrap;
 }
 
+/* Le logo : premier lien, en gros, pousse le reste a droite */
+header nav .logo {
+    font-family: var(--font-titre);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-right: auto;
+    text-decoration: none;
+}
+
+header nav .logo span:first-child { color: var(--brun-principal); }
+header nav .logo span:last-child  { color: var(--vert-ecolo); }
+
+/* Les liens de navigation */
 header nav a {
-    color: var(--blanc);
+    color: var(--texte);
     text-decoration: none;
     font-weight: 500;
-    transition: opacity 0.2s;
+    transition: color 0.2s;
 }
 
 header nav a:hover {
-    opacity: 0.75;
+    color: var(--terracotta);
 }
 
-header nav a:first-child {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-right: auto;
-}
-
+/* Le pseudo + credits quand on est connecte */
 header nav span {
-    color: var(--kraft-clair);
+    color: var(--brun-principal);
     font-size: 0.95rem;
 }
 
 /* ===== Contenu principal ===== */
+
+
+
 main {
     max-width: 1100px;
     margin: 2rem auto;
     padding: 0 2rem;
+    fl
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-titre);
 }
 
 h1 {
@@ -110,6 +139,7 @@ main a {
 }
 
 .banniere-titre {
+    font-family: var(--font-titre);
     font-size: 2.1rem;
     color: var(--brun-principal);
     margin-bottom: 0.5rem;
@@ -163,9 +193,10 @@ main a {
 
 .chiffre-valeur {
     display: block;
+    font-family: var(--font-titre);
     font-size: 1.7rem;
     font-weight: 700;
-    color: var(--brun-principal);
+    color: var(--vert-ecolo);
 }
 
 .chiffre-label {
@@ -195,6 +226,7 @@ input, select {
     border: 1px solid var(--bordure);
     border-radius: 6px;
     font-size: 1rem;
+    font-family: inherit;
     margin-bottom: 0.5rem;
     background-color: var(--creme);
 }
@@ -210,7 +242,9 @@ button {
     border: none;
     padding: 0.7rem 1.5rem;
     border-radius: 6px;
+    font-family: var(--font-titre);
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
 }
@@ -234,6 +268,7 @@ ul {
 }
 
 #resultats li strong, main > ul > li strong {
+    font-family: var(--font-titre);
     color: var(--brun-principal);
     font-size: 1.15rem;
 }
@@ -254,6 +289,7 @@ fieldset {
 }
 
 legend {
+    font-family: var(--font-titre);
     font-weight: 600;
     color: var(--brun-principal);
     padding: 0 0.5rem;
@@ -278,8 +314,9 @@ footer {
     background-color: var(--brun-fonce);
     color: var(--blanc);
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
     margin-top: 3rem;
+    line-height: 1.9;
 }
 
 footer a {
@@ -305,6 +342,7 @@ footer a {
 
 .stat-valeur {
     display: block;
+    font-family: var(--font-titre);
     font-size: 2.2rem;
     font-weight: 700;
     color: var(--terracotta);
@@ -355,4 +393,56 @@ textarea {
 textarea:focus {
     outline: none;
     border-color: var(--terracotta);
+}
+
+/* ===== Graphique en barres (admin) ===== */
+.graphique {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    height: 240px;
+    padding: 1.5rem;
+    background-color: var(--blanc);
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.graph-colonne {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.graph-barre {
+    width: 100%;
+    max-width: 70px;
+    /* La hauteur = proportion de la valeur par rapport au max */
+    height: calc(var(--valeur) / var(--max) * 100%);
+    min-height: 4px;
+    background: var(--terracotta);
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 0.4rem;
+    transition: height 0.4s ease;
+}
+
+.graph-nombre {
+    color: var(--blanc);
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.graph-jour {
+    font-size: 0.8rem;
+    color: var(--texte);
+    text-align: center;
 }

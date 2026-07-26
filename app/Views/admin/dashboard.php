@@ -22,11 +22,27 @@
     </div>
 </div>
 
-<!-- Tableau : covoiturages par jour -->
+<!-- Covoiturages par jour -->
 <h2>Covoiturages par jour</h2>
+
 <?php if (empty($parJour)): ?>
     <p>Aucune donnee disponible.</p>
 <?php else: ?>
+
+    <!-- Graphique en barres (CSS pur) -->
+    <?php $maxTotal = max(array_column($parJour, 'total')); ?>
+    <div class="graphique" role="img" aria-label="Graphique du nombre de covoiturages par jour">
+        <?php foreach ($parJour as $ligne): ?>
+            <div class="graph-colonne">
+                <div class="graph-barre" style="--valeur: <?= (int) $ligne['total'] ?>; --max: <?= (int) $maxTotal ?>;">
+                    <span class="graph-nombre"><?= htmlspecialchars((string) $ligne['total']) ?></span>
+                </div>
+                <span class="graph-jour"><?= htmlspecialchars($ligne['jour']) ?></span>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+    <!-- Tableau detaille -->
     <table class="stats-table">
         <thead>
             <tr>
@@ -43,4 +59,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
 <?php endif; ?>

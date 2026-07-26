@@ -1,8 +1,10 @@
 <!-- Page d'accueil : banniere avec recherche integree -->
 <section class="banniere">
-    <p class="banniere-marque">EcoRide</p>
+    
+    <p class="banniere-accent">🌿 Le covoiturage responsable</p>
     <h1 class="banniere-titre">Roulez malin, roulez vert</h1>
-    <p class="banniere-soustitre">Le covoiturage responsable, economique et convivial.</p>
+    <p class="banniere-soustitre">Trouvez un trajet près de chez vous en 30 secondes.</p>
+    
 
     <!-- Recherche rapide : envoie vers la page covoiturages (methode GET) -->
     <form action="/covoiturages" method="get" class="banniere-recherche" role="search">
