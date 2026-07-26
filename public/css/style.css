@@ -562,3 +562,246 @@ textarea:focus {
     color: #8a7d68;
     line-height: 1.5;
 }
+
+/* ===== Page detail covoiturage ===== */
+.lien-retour {
+    display: inline-block;
+    color: var(--terracotta);
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+
+.trajet-titre {
+    font-size: 2.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.trajet-date {
+    color: #8a7d68;
+    margin-bottom: 1.5rem;
+}
+
+.detail-grille {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.trajet-carte,
+.prix-carte {
+    background-color: var(--blanc);
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Titres de carte --- */
+.carte-titre {
+    font-family: var(--font-titre);
+    font-size: 1.2rem;
+    color: var(--brun-principal);
+    margin-bottom: 1rem;
+}
+
+/* --- Timeline depart/arrivee --- */
+.timeline {
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.etape {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    position: relative;
+}
+
+.etape-point {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.etape-depart {
+    background-color: var(--vert-ecolo);
+}
+
+.etape-arrivee {
+    background-color: var(--terracotta);
+}
+
+.etape-infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.etape-ville {
+    font-weight: 700;
+    color: var(--texte);
+}
+
+.etape-heure {
+    font-size: 0.9rem;
+    color: #8a7d68;
+}
+
+/* --- Separateur --- */
+.separateur {
+    border: none;
+    border-top: 1px solid var(--bordure);
+    margin: 1.25rem 0;
+}
+/* --- Conducteur --- */
+.conducteur {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--kraft-clair);
+    color: var(--brun-principal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-titre);
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.conducteur-nom {
+    font-weight: 700;
+    color: var(--texte);
+}
+
+.conducteur-note {
+    color: #D89A1E;
+    font-size: 0.9rem;
+}
+
+/* --- Vehicule --- */
+.vehicule {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--kraft-clair);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.vehicule-modele {
+    display: block;
+    font-weight: 700;
+    color: var(--brun-principal);
+}
+
+.vehicule-places {
+    display: block;
+    font-size: 0.85rem;
+    color: #8a7d68;
+}
+
+.badge-eco {
+    background-color: #e3eed9;
+    color: #3d5a2e;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+/* --- Avis --- */
+.avis-liste {
+    list-style: none;
+}
+
+.avis-item {
+    background-color: var(--creme);
+    border: 1px solid var(--bordure);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.avis-note {
+    color: #D89A1E;
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.avis-auteur {
+    font-size: 0.9rem;
+    color: #8a7d68;
+}
+
+.avis-commentaire {
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+    color: var(--texte);
+}
+
+.avis-vide {
+    color: #8a7d68;
+}
+
+/* --- Carte prix --- */
+.prix-label {
+    color: #8a7d68;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.prix-montant {
+    margin-bottom: 0;
+}
+
+.prix-montant strong {
+    font-family: var(--font-titre);
+    font-size: 2rem;
+    color: var(--terracotta);
+}
+
+.places-dispo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    color: var(--texte);
+}
+
+.places-dispo span:last-child {
+    font-weight: 700;
+    color: var(--brun-principal);
+}
+
+.btn-participer {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: var(--vert-ecolo);
+    color: var(--blanc);
+    padding: 0.9rem;
+    border-radius: 10px;
+    font-family: var(--font-titre);
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-participer:hover {
+    background-color: #4a6339;
+}
