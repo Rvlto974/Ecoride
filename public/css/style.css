@@ -805,3 +805,90 @@ textarea:focus {
 .btn-participer:hover {
     background-color: #4a6339;
 }
+
+/* ===== Page liste covoiturages ===== */
+.liste-titre {
+    margin-bottom: 1.5rem;
+}
+
+/* Barre de recherche horizontale */
+.recherche-barre {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    max-width: none;
+}
+
+.recherche-barre .champ {
+    flex: 1;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.recherche-barre .champ input {
+    margin-bottom: 0;
+}
+
+/* Layout : filtres a gauche, resultats a droite */
+.liste-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin-top: 1.5rem;
+}
+
+.filtres {
+    max-width: none;
+    margin-bottom: 0;
+}
+
+.filtre-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.filtres .champ {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.75rem;
+}
+
+/* Liste des trajets */
+.trajets {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.trajet-carte-liste {
+    background-color: var(--blanc);
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-left: 4px solid var(--vert-ecolo);
+}
+
+.trajet-route {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-titre);
+    font-size: 1.15rem;
+    color: var(--brun-principal);
+    margin-bottom: 0.5rem;
+}
+
+.point-depart {
+    width: 10px;
+    height: 10px;
+}
